@@ -29,10 +29,10 @@ jobs:
       steps:
       - uses: actions/checkout@v3
       - id: test1
-        name: Perfromance Tests mysql-connector-odbc-8.0.32
+        name: Perfromance Tests mysql-connector-odbc-8.0.33
         run: |
           docker-compose down
-          docker-compose build --build-arg odbcdlurl=https://dev.mysql.com/get/Downloads/Connector-ODBC/8.0/mysql-connector-odbc-8.0.32-linux-glibc2.28-x86-64bit.tar.gz
+          docker-compose build --build-arg odbcdlurl=https://dev.mysql.com/get/Downloads/Connector-ODBC/8.0/mysql-connector-odbc-8.0.33-linux-glibc2.28-x86-64bit.tar.gz
           docker-compose up --abort-on-container-exit
           dlogs=$(docker-compose logs --no-log-prefix --no-color test | tail -1)
           echo "x=$dlogs" >> $GITHUB_OUTPUT
@@ -50,4 +50,4 @@ jobs:
         with:
           message: |
             mysql-connector-odbc-8.0.19: **${{needs.test_8_0_19.outputs.runtime}}** 
-            mysql-connector-odbc-8.0.32: **${{needs.test_8_0_32.outputs.runtime}}**
+            mysql-connector-odbc-8.0.33: **${{needs.test_8_0_32.outputs.runtime}}**
