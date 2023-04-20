@@ -22,7 +22,7 @@ jobs:
         dlogs=$(docker-compose logs --no-log-prefix --no-color test | tail -1)
         echo "x=$dlogs" >> $GITHUB_OUTPUT
   
-  test_8_0_32:
+  test_8_0_33:
       runs-on: ubuntu-latest
       outputs:
         runtime: ${{ steps.test1.outputs.x }}
@@ -43,11 +43,11 @@ jobs:
         pull-requests: write
       needs: 
         - test_8_0_19
-        - test_8_0_32
+        - test_8_0_33
       steps:
       - name: Comment PR
         uses: thollander/actions-comment-pull-request@v2
         with:
           message: |
             mysql-connector-odbc-8.0.19: **${{needs.test_8_0_19.outputs.runtime}}** 
-            mysql-connector-odbc-8.0.33: **${{needs.test_8_0_32.outputs.runtime}}**
+            mysql-connector-odbc-8.0.33: **${{needs.test_8_0_33.outputs.runtime}}**
